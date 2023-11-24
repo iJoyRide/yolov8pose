@@ -29,8 +29,8 @@ async def count_classes(root_dir):
     progress = tqdm(total=len(files_to_process), desc="Processing Files")
 
     while files_to_process:
-        batch = files_to_process[:50]
-        files_to_process = files_to_process[50:]
+        batch = files_to_process[:200]
+        files_to_process = files_to_process[200:]
         await asyncio.gather(*(process_file(file, class_counts, progress) for file in batch))
     
     progress.close()  # Close the progress bar
@@ -59,8 +59,8 @@ def plot_and_save_barchart(class_counts, output_path):
 
 
 async def main():
-    root_directory = r"\\192.168.77.100\Model_Center\Yolo\YoloV8CY\yolov8pose\data_v2\labels"
-    output_file = r"\\192.168.77.100\Model_Center\Yolo\YoloV8CY\yolov8pose\bar_chart.png"
+    root_directory = r"\\192.168.77.100\Model_Center\Yolo\YoloV8CY\yolov8pose\data\labels"
+    output_file = r"\\192.168.77.100\Model_Center\Yolo\YoloV8CY\yolov8pose\bar_chart1.png"
     print("Starting to count classes...")
     class_counts = await count_classes(root_directory)
     print("Finished counting. Plotting bar chart...")
